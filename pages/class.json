@@ -1,0 +1,337 @@
+{
+  "namespace": [
+    "Discorb",
+    "Snowflake"
+  ],
+  "parent": [
+    "String"
+  ],
+  "type": "class",
+  "docstring": {
+    "text": "Represents Snowflake of Discord.",
+    "notes": [
+
+    ],
+    "todo": [
+
+    ],
+    "deprecated": [
+
+    ]
+  },
+  "consts": [
+
+  ],
+  "iattrs": [
+    {
+      "name": "timestamp",
+      "docstring": {
+        "text": "Timestamp of snowflake.",
+        "notes": [
+
+        ],
+        "todo": [
+
+        ],
+        "deprecated": [
+
+        ]
+      },
+      "parent": [
+        true,
+        [
+          "Discorb",
+          "Snowflake"
+        ]
+      ],
+      "returns": [
+        {
+          "class": [
+            "Time"
+          ],
+          "description": "Timestamp of snowflake."
+        }
+      ]
+    },
+    {
+      "name": "worker_id",
+      "docstring": {
+        "text": "Worker ID of snowflake.",
+        "notes": [
+
+        ],
+        "todo": [
+
+        ],
+        "deprecated": [
+
+        ]
+      },
+      "parent": [
+        true,
+        [
+          "Discorb",
+          "Snowflake"
+        ]
+      ],
+      "returns": [
+        {
+          "class": [
+            "Integer"
+          ],
+          "description": "Worker ID of snowflake."
+        }
+      ]
+    },
+    {
+      "name": "process_id",
+      "docstring": {
+        "text": "Process ID of snowflake.",
+        "notes": [
+
+        ],
+        "todo": [
+
+        ],
+        "deprecated": [
+
+        ]
+      },
+      "parent": [
+        true,
+        [
+          "Discorb",
+          "Snowflake"
+        ]
+      ],
+      "returns": [
+        {
+          "class": [
+            "Integer"
+          ],
+          "description": "Process ID of snowflake."
+        }
+      ]
+    },
+    {
+      "name": "increment",
+      "docstring": {
+        "text": "Increment of snowflake.",
+        "notes": [
+
+        ],
+        "todo": [
+
+        ],
+        "deprecated": [
+
+        ]
+      },
+      "parent": [
+        true,
+        [
+          "Discorb",
+          "Snowflake"
+        ]
+      ],
+      "returns": [
+        {
+          "class": [
+            "Integer"
+          ],
+          "description": "Increment of snowflake."
+        }
+      ]
+    },
+    {
+      "name": "id",
+      "docstring": {
+        "text": "Alias of to_s.",
+        "notes": [
+
+        ],
+        "todo": [
+
+        ],
+        "deprecated": [
+
+        ]
+      },
+      "parent": [
+        true,
+        [
+          "Discorb",
+          "Snowflake"
+        ]
+      ],
+      "returns": [
+        {
+          "class": [
+            "String"
+          ],
+          "description": "The snowflake."
+        }
+      ]
+    }
+  ],
+  "imethods": [
+    {
+      "docstring": {
+        "text": "Compares snowflake with other object.",
+        "notes": [
+
+        ],
+        "todo": [
+
+        ],
+        "deprecated": [
+
+        ]
+      },
+      "name": "==",
+      "parent": [
+        true,
+        [
+          "Discorb",
+          "Snowflake"
+        ]
+      ],
+      "returns": [
+        {
+          "class": [
+            "Boolean"
+          ],
+          "description": "True if snowflake is equal to other object."
+        }
+      ],
+      "aliases": [
+
+      ],
+      "params": [
+        {
+          "class": [
+            "#to_s"
+          ],
+          "name": "other",
+          "required": true,
+          "default": null,
+          "type": "positional",
+          "description": "Object to compare with."
+        }
+      ],
+      "flags": {
+        "async": false
+      }
+    },
+    {
+      "docstring": {
+        "text": "Alias of {#==}.",
+        "notes": [
+
+        ],
+        "todo": [
+
+        ],
+        "deprecated": [
+
+        ]
+      },
+      "name": "eql?",
+      "parent": [
+        true,
+        [
+          "Discorb",
+          "Snowflake"
+        ]
+      ],
+      "returns": [
+        {
+          "class": [
+            "Boolean"
+          ],
+          "description": ""
+        }
+      ],
+      "aliases": [
+
+      ],
+      "params": [
+
+      ],
+      "flags": {
+        "async": false
+      }
+    },
+    {
+      "docstring": {
+        "text": "Return hash of snowflake.",
+        "notes": [
+
+        ],
+        "todo": [
+
+        ],
+        "deprecated": [
+
+        ]
+      },
+      "name": "hash",
+      "parent": [
+        true,
+        [
+          "Discorb",
+          "Snowflake"
+        ]
+      ],
+      "returns": [
+
+      ],
+      "aliases": [
+
+      ],
+      "params": [
+
+      ],
+      "flags": {
+        "async": false
+      }
+    },
+    {
+      "docstring": {
+        "text": "",
+        "notes": [
+
+        ],
+        "todo": [
+
+        ],
+        "deprecated": [
+
+        ]
+      },
+      "name": "inspect",
+      "parent": [
+        true,
+        [
+          "Discorb",
+          "Snowflake"
+        ]
+      ],
+      "returns": [
+
+      ],
+      "aliases": [
+
+      ],
+      "params": [
+
+      ],
+      "flags": {
+        "async": false
+      }
+    }
+  ],
+  "cmethods": [
+
+  ]
+}
