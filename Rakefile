@@ -6,7 +6,7 @@ task :build_all do
   end
   tags.each do |t|
     Dir.chdir "../discorb" do
-      sh "git checkout #{t}"
+      sh "git checkout #{t} -f"
       sh "yardoc -n"
     end
     ruby "scripts/namespaces.rb"

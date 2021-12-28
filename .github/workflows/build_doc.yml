@@ -39,10 +39,6 @@ jobs:
           bundle install
           cd ../discorb-doc
           npm install
-      - name: Generate document
-        run: |
-          cd discorb
-          bundle exec rake document
       - name: Generate db
         run: |
           cd discorb-doc
