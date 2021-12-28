@@ -27,7 +27,9 @@ contents.each do |file, content|
   FileUtils.mkdir_p dist
   new_content = +content.dup
   new_content.gsub!(/\{include:file:([^}]+)\}/) do |match|
-    file_content = File.read(File.join(discorb_dir, $1))
+    file_content = File.read(
+      Dir.glob(File.join(discorb_dir, $1), File::FNM_CASEFOLD).first
+    )
     if $1.end_with?(".rb")
       "```ruby\n#{file_content}\n```"
     else
