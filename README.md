@@ -12,3 +12,8 @@ ruby script/files.rb
 npm run build
 ```
 
+## Build All versions
+
+```
+rake build_all
+```
