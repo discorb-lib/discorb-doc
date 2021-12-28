@@ -37,6 +37,9 @@ class Markdown extends React.Component {
           }
           href += "#" + convertToId(p1.split(/[\.#]/)[1], p1.search(/[\.#]/)[0])
           description = p1
+        } else if (p1.match(/::/g)) {
+          href = "/objects/" + p1.replaceAll("::", "/")
+          description = p1
         } else {
           return match
         }
