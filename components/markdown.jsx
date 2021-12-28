@@ -58,7 +58,6 @@ class Markdown extends React.Component {
                 // props.href = 
                 let nProps = { ...props }
                 delete nProps.children
-                console.log(props.href)
                 return <Link href={props.href} {...nProps}>{props.children[0]}</Link>
               }
             },

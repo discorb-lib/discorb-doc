@@ -45,8 +45,8 @@ jobs:
       - name: Generate db
         run: |
           cd discorb-doc
-          ruby scripts/namespace.rb
-          ruby scripts/getter.rb
+          ruby scripts/namespaces.rb
+          ruby scripts/methods.rb
           ruby scripts/files.rb
       - name: Generate with Next.js
         run: |
