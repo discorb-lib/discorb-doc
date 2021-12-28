@@ -51,7 +51,7 @@ jobs:
           npm run build
           npx next export
         env:
-          URL_PREFIX: "/discorb-doc"
+          URL_PREFIX: "https://discorb-lib.github.io/discorb-doc"
       - name: Push document
         run: |
           cd discorb-doc
