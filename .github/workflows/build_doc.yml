@@ -25,6 +25,7 @@ jobs:
         with:
           repository: "discorb-lib/discorb"
           path: "discorb"
+          fetch-depth: 0
       - name: Checkout discorb-doc
         uses: actions/checkout@v2
         with:
