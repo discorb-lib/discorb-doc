@@ -3,7 +3,7 @@ import namespaces from "db/namespaces";
 import files from "db/files";
 import Icon from "@mdi/react";
 import { mdiChevronRight } from "@mdi/js";
-import { withRouter } from 'next/router';
+import { useRouter, withRouter } from 'next/router';
 import Link from "next/link";
 function arrayStartsWith(a, b) {
   return a.length >= b.length && a.slice(0, b.length).every((v, i) => v == b[i])
@@ -77,22 +77,53 @@ function FileList({ path }) {
     </>
   )
 }
+function VersionList({  }) {
+  const router = useRouter()
+  
+  if (!process.env.NEXT_PUBLIC_VERSIONS) {
+    return (
+      <div className="pl-4">??????</div>
+    )
+  }
+  return (
+    <>
+      {
+        process.env.NEXT_PUBLIC_VERSIONS.split(":").map((version) => (
+          <div className="pl-4">
+            <a href={`/${version == "latest" ? "." : version}`} key={version}>{version}</a>
+          </div>
+        ))
+      }
+    </>
+  )
+}
 class SideBar extends React.Component {
   togglePage = (e) => {
     let target = e.target;
-    while (target.tagName.toLowerCase() !== "div") {
+    if (target.tagName.toLowerCase() === "div") {
+      return
+    }
+    while (target.tagName.toLowerCase() !== "span") {
       target = target.parentElement
     }
-    const sideBar = target.parentElement.parentElement
-    const files = sideBar.querySelector(".files")
-    const objects = sideBar.querySelector(".objects")
-    files.classList.toggle("hidden")
-    objects.classList.toggle("hidden")
+    const sideBar = target.parentElement.parentElement.parentElement
+    const targetPage = [...target.classList].filter(c => c.startsWith("t-"))[0].substr(2)
+    const tabSelectors = Array.from(sideBar.querySelectorAll(".tab-selector"))
+    const tabContents = Array.from(sideBar.querySelectorAll(".tab-content"))
+    tabSelectors.forEach((t, i) => {
 
-    target.querySelector(".t-objects").classList.toggle("border-dblurple")
-    target.querySelector(".t-files").classList.toggle("border-dblurple")
-    target.querySelector(".t-objects").classList.toggle("border-transparent")
-    target.querySelector(".t-files").classList.toggle("border-transparent")
+      if (t.classList.contains("t-" + targetPage)) {
+        t.classList.add("border-dblurple")
+        t.classList.add("text-dblurple")
+        t.classList.remove("border-transparent")
+        tabContents[i].classList.remove("hidden")
+      } else {
+        t.classList.remove("border-dblurple")
+        t.classList.remove("text-dblurple")
+        t.classList.add("border-transparent")
+        tabContents[i].classList.add("hidden")
+      }
+    })
 
   }
   render() {
@@ -125,15 +156,19 @@ class SideBar extends React.Component {
             <h1 className="text-2xl font-bold">Discorb</h1>
           </div>
           <div className="flex" onClick={this.togglePage}>
-            <span className={`flex-auto mx-4 w-1/2 text-center border-b-2 t-objects ${status != "files" ? "border-dblurple" : "border-transparent"}`}>Objects</span>
-            <span className={`flex-auto mx-4 w-1/2 text-center border-b-2 t-files ${status == "files" ? "border-dblurple" : "border-transparent"}`}>Files</span>
+            <span className={`flex-auto mx-4 w-1/3 text-center border-b-2 tab-selector t-objects ${status != "files" ? "border-dblurple text-dblurple" : "border-transparent"}`}>Objects</span>
+            <span className={`flex-auto mx-4 w-1/3 text-center border-b-2 tab-selector t-files ${status == "files" ? "border-dblurple text-dblurple" : "border-transparent"}`}>Files</span>
+            <span className={`flex-auto mx-4 w-1/3 text-center border-b-2 tab-selector t-versions border-transparent`}>Versions</span>
           </div>
         </div>
-        <div className={`bg-slate-100 h-full box-border flex flex-col overflow-scroll objects ${status == "files" && "hidden"}`}>
+        <div className={`bg-slate-100 h-full box-border flex flex-col overflow-scroll tab-content objects ${status == "files" && "hidden"}`}>
           <ObjectTree path={path} child={namespaces.filter(n => n.length == 1)} level={1} />
         </div>
-        <div className={`bg-slate-100 h-full box-border flex flex-col overflow-scroll files ${status != "files" && "hidden"}`}>
+        <div className={`bg-slate-100 h-full box-border flex flex-col overflow-scroll tab-content files ${status != "files" && "hidden"}`}>
           <FileList path={path} />
+        </div>
+        <div className={`bg-slate-100 h-full box-border flex flex-col overflow-scroll tab-content files ${status != "files" && "hidden"}`}>
+          <VersionList path={path} />
         </div>
       </aside>
     )

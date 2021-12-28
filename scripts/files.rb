@@ -34,6 +34,7 @@ contents.each do |file, content|
       "```\n#{file_content}\n```"
     end
   end
+  new_content.gsub!(/# @title (.*)/, "")
   File.write(dist + "/" + File.basename(file), new_content)
 end
 asset_dirs.each do |file, (content, dir)|

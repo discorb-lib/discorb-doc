@@ -1,4 +1,4 @@
-name: Build YARD with main
+name: Build document
 
 on:
   workflow_dispatch:
@@ -51,8 +51,7 @@ jobs:
       - name: Generate with Next.js
         run: |
           cd discorb-doc
-          npm run build
-          npx next export
+          rake build_all
         env:
           URL_PREFIX: "discorb-doc"
       - name: Change for GitHub Pages

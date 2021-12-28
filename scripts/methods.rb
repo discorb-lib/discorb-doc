@@ -28,7 +28,7 @@ def get_docstring(docstring)
         text = t.text
         if text.nil?
           text = if t.name.start_with?("file")
-              File.read("./db/files/" + t.name.split(":")[1]).match(/@title\s+(.*)/)[1]
+              File.read("./db/files/" + t.name.split(":")[1].split("#")[0]).match(/@title\s+(.*)/)[1] rescue ""
             else
               t.name
             end
