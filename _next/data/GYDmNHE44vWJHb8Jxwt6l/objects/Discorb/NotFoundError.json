@@ -1,0 +1,1 @@
+{"pageProps":{"data":{"namespace":["Discorb","NotFoundError"],"parent":["Discorb","HTTPError"],"type":"class","abstract":false,"docstring":{"text":"Represents a 404 error.","notes":[],"todo":[],"deprecated":[],"example":[],"see_also":[]},"children":{"classes":[],"modules":[]},"consts":[],"rattrs":[],"imethods":[],"cmethods":[]}},"__N_SSG":true}

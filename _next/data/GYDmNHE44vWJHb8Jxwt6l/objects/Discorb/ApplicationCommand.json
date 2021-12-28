@@ -1,0 +1,1 @@
+{"pageProps":{"data":{"namespace":["Discorb","ApplicationCommand"],"parent":[],"type":"module","abstract":false,"docstring":{"text":"Handles application commands.","notes":[],"todo":[],"deprecated":[],"example":[],"see_also":[]},"children":{"classes":["Command"],"modules":["Handler"]},"consts":[],"rattrs":[],"imethods":[],"cmethods":[]}},"__N_SSG":true}
