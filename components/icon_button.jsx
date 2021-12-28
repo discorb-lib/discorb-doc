@@ -2,6 +2,7 @@ import Icon from '@mdi/react'
 import React from 'react'
 import { mdiChevronDown, mdiLinkVariant, mdiClockOutline, mdiFileTree } from '@mdi/js';
 import { scrollToElement, convertToId } from "common/utils";
+import Link from 'next/link'
 
 export class CollapseArrow extends React.Component {
   constructor(props) {
@@ -64,7 +65,7 @@ export class PermalinkBase extends React.Component {
     scrollToElement(document.getElementById(this.getId()))
   }
   render() {
-    return (<HoverIcon path={mdiLinkVariant} onClick={this.handleClick} title="Permalink" />)
+    return (<HoverIcon path={mdiLinkVariant} onClick={this.handleClick} href={`#${this.getId()}`} title="Permalink" />)
   }
 }
 function HoverIcon({ path, onClick, href, title }) {
@@ -73,6 +74,7 @@ function HoverIcon({ path, onClick, href, title }) {
       <Icon path={path} size={0.8} />
     </a>
   )
+
 }
 export function AsyncIcon() {
   return (
@@ -85,8 +87,8 @@ export function TreeIcon({ cls, method, prefix }) {
     "#" +
     convertToId(method.name, prefix)
   return (
-    (<a href={href}>
+    (<Link href={href}>
       <HoverIcon path={mdiFileTree} title="Defined in other classes/modules" />
-    </a>)
+    </Link>)
   )
 }

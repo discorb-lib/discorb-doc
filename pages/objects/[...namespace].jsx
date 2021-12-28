@@ -3,6 +3,7 @@ import React from 'react'
 import { MethodContainer, Overview, scrollToMethod } from 'components/methods'
 import { join, captialize } from "common/utils"
 import { promises as fs } from 'fs'
+import Link from 'next/link'
 
 // This also gets called at build time
 export async function getStaticProps({ params }) {
@@ -26,8 +27,7 @@ export async function getStaticPaths() {
 
 function ClassLink({ index, items, children }) {
   let link = items.slice(0, index + 1).join("/")
-  link = "../".repeat(items.length - index - 1) + link
-  return (<a href={link}>{children}</a>)
+  return (<Link href={`/${link}`}>{children}</Link>)
 }
 
 export default class Class extends React.Component {

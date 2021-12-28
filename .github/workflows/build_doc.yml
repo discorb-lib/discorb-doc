@@ -50,12 +50,10 @@ jobs:
           cd discorb-doc
           npm run build
           npx next export
+        env:
+          URL_PREFIX: "/discorb-doc"
       - name: Push document
-        run: |
-          cd discorb-doc
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git switch -c gh-pages
-          git add out -f
-          git commit -m "Update: Update document"
-          git push origin gh-pages -f
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out

@@ -52,7 +52,11 @@
   }
 
   a {
+    code{
+      @apply cursor-pointer 
+    }
     @apply text-dlink
+    
   }
   ul{
     @apply list-disc ml-4
@@ -63,4 +67,5 @@
   img{
     @apply py-2 max-h-[50vh]
   }
+
 }

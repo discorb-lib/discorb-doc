@@ -6,8 +6,9 @@ import Link from 'next/link'
 import remarkGfm from 'remark-gfm'
 import { CodeBlock } from './syntax';
 import files from "db/files"
+import {withRouter} from 'next/router'
 
-export default class Markdown extends React.Component {
+class Markdown extends React.Component {
 
   render() {
     let children = this.props.children
@@ -17,21 +18,11 @@ export default class Markdown extends React.Component {
         if ((children.substr(0, offset).match(/```/g)?.length || 0) % 2 == 1) {
           return match
         }
-        let href = ""
+        let href = "/"
         let description = ""
-        let root = ""
-        if (this.props.cls) {
-          root = "../".repeat(this.props.cls.namespace.length)
-        } else if (this.props.path) {
-          root = "../".repeat(this.props.path.length - 2)
-        }
         if (p1.startsWith("file:")) {
-          href = root
-          if (this.props.cls) {
-            href += "../files/"
-          }
+          href = "/files/"
           if (p1.includes(" ")) {
-            
             let match = p1.substring(5).match(/^(.+?) (.+)$/)
             href += match[1]
             description = match[2]
@@ -41,12 +32,8 @@ export default class Markdown extends React.Component {
           }
 
         } else if (p1.match(/[\.#]/g)) {
-          if (this.props.path) {
-            href += "../files/"
-          }
           if (p1.split(/[\.#]/)[0].length > 1) {
-            href = root +
-              p1.split(/[\.#]/)[0].replaceAll("::", "/")
+            href = "/objects/" + p1.split(/[\.#]/)[0].replaceAll("::", "/")
           }
           href += "#" + convertToId(p1.split(/[\.#]/)[1], p1.search(/[\.#]/)[0])
           description = p1
@@ -68,7 +55,8 @@ export default class Markdown extends React.Component {
                 // props.href = 
                 let nProps = { ...props }
                 delete nProps.children
-                return <Link to={props.href} {...nProps}>{props.children[0]}</Link>
+                console.log(props.href)
+                return <Link href={props.href} {...nProps}>{props.children[0]}</Link>
               }
             },
 
@@ -85,14 +73,14 @@ export default class Markdown extends React.Component {
           }
         }
         rehypePlugins={[rehypeRaw, remarkGfm]}
-        transformImageUri={uri =>{
-          return uri.startsWith("http") ? uri : `http://localhost:3000/${uri}`
-
-        }
-        }
+        transformImageUri={uri => {
+          return uri.startsWith("http") ? uri : `${this.props.router.basePath}/${uri}`
+        }}
       >
         {children}
       </ReactMarkdown>
     )
   }
 }
+
+export default withRouter(Markdown)

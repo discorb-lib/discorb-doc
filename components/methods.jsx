@@ -64,14 +64,11 @@ function YardBoxes({ type, source, cls }) {
                 if (url.match(/^https?:\/\//)) {
                   href = url
                 } else if (url.startsWith("file:")) {
-                  href = "../".repeat(cls.namespace.length) +
-                    "../file/" +
-                    url.substring(5)
+                  href = `/files/${url.substring(5)}`
 
                 } else {
                   if (url.split(/[\.#]/)[0].length > 1) {
-                    href = "../".repeat(cls.namespace.length) +
-                      url.split(/[\.#]/)[0].replaceAll("::", "/")
+                    href = `/objects/${url.split(/[\.#]/)[0].replaceAll("::", "/")}`
                   }
                   if (url.match(/[\.#]/g)) {
                     href += "#" + convertToId(url.split(/[\.#]/)[1], url.search(/[\.#]/)[0])
@@ -79,7 +76,7 @@ function YardBoxes({ type, source, cls }) {
                   description = url
                 }
                 return (
-                  <Link key={url} href={href} className="text-dlink">{description}</Link>
+                  <Link key={url} href={href} ><span className="text-dlink cursor-pointer">{description}</span></Link>
                 )
               })
             }
@@ -260,12 +257,11 @@ function MethodDescription({ method, noBrackets, prefix, cls }) {
       )}
       {!method.parent[0] && (
         <span className="text-neutral-500">Defined in:{" "}
-          <a
-            className="font-mono text-neutral-800"
+          <Link
             href={
-              `${"../".repeat(cls.namespace.length)}${method.parent[1].join("/")}#${convertToId(method, prefix)}`
+              `/objects/${method.parent[1].join("/")}#${convertToId(method, prefix)}`
             }
-          >{method.parent[1].join("::")}</a>
+          ><span className="font-mono text-neutral-800 cursor-pointer">{method.parent[1].join("::")}</span></Link>
         </span>
       )}
       <YardDescription source={method.docstring} cls={cls} />
@@ -368,13 +364,13 @@ export function Overview({ docstring, cls }) {
         {cls.children.classes.length > 0 && (<>
           <strong>Classes:</strong>
           <div className="pl-4">{cls.children.classes.map(c => (
-            <Link key={c} href={[...cls.namespace, c].join("/")}><a className="font-mono text-dlink">{c}</a></Link>
+            <Link key={c} href={"/" + ["objects", ...cls.namespace, c].join("/")}><span className="font-mono cursor-pointer text-dlink">{c}</span></Link>
           )).reduce(join(<span>, </span>))}</div>
         </>)}
         {cls.children.modules.length > 0 && (<>
           <strong>Modules:</strong>
           <div className="pl-4">{cls.children.modules.map(c => (
-            <Link key={c} href={[...cls.namespace, c].join("/")}><a className="font-mono text-dlink">{c}</a></Link>
+            <Link key={c} href={"/" + ["objects", ...cls.namespace, c].join("/")}><span className="font-mono cursor-pointer text-dlink">{c}</span></Link>
           )).reduce(join(<span>, </span>))}
           </div>
         </>)}
