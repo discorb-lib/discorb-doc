@@ -58,4 +58,4 @@ jobs:
           git switch -c gh-pages
           git add out -f
           git commit -m "Update: Update document"
-          git push origin main -f
+          git push origin gh-pages -f
