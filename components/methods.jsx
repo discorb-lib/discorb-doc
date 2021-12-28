@@ -359,6 +359,12 @@ export function Overview({ docstring, cls }) {
     <div className="py-2">
       <h2 className="text-3xl">Overview</h2>
       <YardDescription source={docstring} cls={cls} from="class" />
+      {cls.mixin.length > 0 && (<>
+        <h3 className="text-xl mt-2">Mixins</h3>
+        <div className="pl-4">{cls.mixin.map(c => (
+          <Link key={c} href={"/" + ["objects", ...cls.namespace, c].join("/")}><span className="font-mono cursor-pointer text-dlink">{c.join("::")}</span></Link>
+        )).reduce(join(<span>, </span>))}</div>
+      </>)}
       {(cls.children.classes.length > 0 || cls.children.classes.length > 0) && (<>
         <h3 className="text-xl mt-2">Defined Under Namespace</h3>
         {cls.children.classes.length > 0 && (<>

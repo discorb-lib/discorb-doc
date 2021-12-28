@@ -27,7 +27,7 @@ export async function getStaticPaths() {
 
 function ClassLink({ index, items, children }) {
   let link = items.slice(0, index + 1).join("/")
-  return (<Link href={`/${link}`}>{children}</Link>)
+  return (<Link href={`/objects/${link}`}>{children}</Link>)
 }
 
 export default class Class extends React.Component {
@@ -61,7 +61,16 @@ export default class Class extends React.Component {
                 <ClassLink index={index} items={data.namespace}>{name}</ClassLink>
               </span>))
               .reduce(join(<span className="text-neutral-500">::</span>))
-          }</span></h1>
+          }</span>{data.superclass && [
+            " < ",
+            data.superclass.map((name, index) => (<span className="text-neutral-600" key={name}>
+              <ClassLink index={index} items={data.superclass}>{name}</ClassLink>
+            </span>))
+            .reduce(join(<span className="text-neutral-500">::</span>))
+
+          ]}
+          
+          </h1>
           <div className="grid grid-cols-1 border-y divide-y divide-slate-400 border-slate-400">
             <Overview docstring={data.docstring} cls={data} />
             <MethodContainer methods={data.consts} name="Constants" prefix="::" noBrackets={true} type="const" cls={data} />

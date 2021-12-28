@@ -104,6 +104,12 @@ JSON.parse(File.read("./db/namespaces.json"), symbolize_names: true).each do |ns
     type: r.type,
     abstract: r.has_tag?("abstract"),
     docstring: get_docstring(r.docstring),
+    superclass: if r.type == :class
+      r.superclass.is_a?(YARD::CodeObjects::Proxy) ? nil : r.superclass.path.split("::")
+    else
+      nil
+    end,
+    mixin: r.instance_mixins.map(&:path).map { |pa| pa.split("::") },
     children: {
       classes: r.children.filter { |c| c.type == :class && c.public? }.map { |c|
         c.title.split("::").last
