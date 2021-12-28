@@ -48,6 +48,7 @@ jobs:
       - name: Generate with Next.js
         run: |
           cd discorb-doc
+          touch public/.nojekyll
           npm run build
           npx next export
         env:
@@ -57,7 +58,6 @@ jobs:
           cd discorb-doc
           ls | grep -v -E '^(.git|out)$' | xargs rm -rf
           mv out/* .
-          touch .nojekyll
       - name: Push document
         run: |
           cd discorb-doc
