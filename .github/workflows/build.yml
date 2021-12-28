@@ -5,6 +5,9 @@ on:
 
 jobs:
   main:
+    runs-on: ubuntu-latest
+
+    steps:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
